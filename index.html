@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<style>
+    .content {
+      max-width: 50%;
+      /* text-align: center; */
+      margin: auto;
+    }
+    </style>
+<html>
+<body>
+
+<div class="content">
+<h1>GenOffense: Generalized Offensive Language Detection Benchmark</h1>
+Generalizability is the ability of machine learning models to perform consistently among different datasets.
+However, there has been limited research on generalizability of offensive language detection systems.
+Several popular offensive language detection datasets exists, however these datasets are annotated using different guidelines and taxonomies.
+Hence it becomes difficult to combine these datasets to train and evaluate offensive language models.
+To address this issue we propose GenOffense, a generalized offensive language detection benchmark.
+</div>
+
+<div class="content">
+<h2>Datasets</h2>
+We use eight popular publicly available datasets containing English data to construct GenOffense.
+<ul>
+    <li><p>AHSD: The dataset contains data retrieved from Twitter and it was annotated using crowdsourcing.
+        The annotation taxonomy contains three classes Offensive, Hate, and Neither.
+        We conflate Offensive and Hate under a class OFF while the neither class corresponds to OLID’s NOT class.</p></li>
+    <li><p>HASOC: This dataset used in the HASOC shared task 2020.
+        It contains posts retrieved from Twitter and Facebook.
+        The upper level of the annotation taxonomy used in HASOC is hate-offensive vs non Non hate-offensive, which is the same as OLID’s.
+        This allows us to directly map hate-offensive to OLID’s OFF class and non hate-offensive to NOT class.</p></li>
+    <li><p>HatEval: the official dataset at SemEval-2019 Task 5 (HatEval), which focuses on hate speech against migrants and women.
+        The first level of annotation contains two classes, hate speech or not, which can be mapped directly to OLID’s OFF and NOT categories.</p></li>
+    <li><p>HateExplain: This is a dataset collected for explainability of hate speech.
+        It contains both token- and post-level annotation of Twitter and Gab posts.
+        Post-level annotations have three classes; Hateful, Offensive and Normal.
+        We map Hateful and Offensive classes to OFF class and Normal to NOT class.</p></li>
+    <li><p>OHS: This is a dataset collected from Reddit with the goal of studying interventions in conversations containing hate speech.
+        Full conversations/threads have been retrieved and annotated at the post-level as hateful or not hateful which we map to OFF and NOT classes correspondingly.</p></li>
+    <li><p>OLID: This is the official dataset of the SemEval-2019 Task 6 (OffensEval).
+        It contains data from Twitter annotated with a three-level hierarchical annotation which we described before.
+        We adopt the labels in OLID level A as our classification labels.</p></li>
+    <li><p>TCC: This is the Toxic Comment Classification dataset.
+        TCC was created for the Kaggle competition with the same name.
+        The dataset contains Wikipedia comments with various classes such as toxic, obscene, insult, and threat merged in the OLID OFF class.
+        The rest of the instances were mapped to the NOT class.</p></li>
+    <li><p>TRAC: This is the dataset used in the TRAC shared task 2020.
+        It focuses on aggression detection with three classes: overtly aggressive and covertly aggressive merged as OFF and non-aggressive which corresponds to the NOT class used in OLID.
+        Finally, TRAC is the most heterogeneous dataset we used in terms of data sources containing posts from Facebook, Twitter, and YouTube.</p></li>
+</ul>
+</div>
+
+<div class="content">
+<h2>Code</h2>
+The code and the datasets can be accessed here: <a href="https://github.com/TharinduDR/GeneralOffense.git">GenOffense</a>
+</div>
+
+
+</body>
+</html>
