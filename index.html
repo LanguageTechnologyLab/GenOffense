@@ -5,8 +5,25 @@
       /* text-align: center; */
       margin: auto;
     }
-    </style>
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+</style>
+
 <html>
+
 <body>
 
 <div class="content">
@@ -22,7 +39,7 @@ To address this issue we propose GenOffense, a generalized offensive language de
 <h2>Datasets</h2>
 We use eight popular publicly available datasets containing English data to construct GenOffense.
 <ul>
-    <li><p>AHSD: The dataset contains data retrieved from Twitter and it was annotated using crowdsourcing.
+    <li><p>AHSD: This is one of the most popular hate speech datasets available. The dataset contains data retrieved from Twitter and it was annotated using crowdsourcing.
         The annotation taxonomy contains three classes Offensive, Hate, and Neither.
         We conflate Offensive and Hate under a class OFF while the neither class corresponds to OLID’s NOT class.</p></li>
     <li><p>HASOC: This dataset used in the HASOC shared task 2020.
@@ -48,11 +65,137 @@ We use eight popular publicly available datasets containing English data to cons
         It focuses on aggression detection with three classes: overtly aggressive and covertly aggressive merged as OFF and non-aggressive which corresponds to the NOT class used in OLID.
         Finally, TRAC is the most heterogeneous dataset we used in terms of data sources containing posts from Facebook, Twitter, and YouTube.</p></li>
 </ul>
+
+<p>The table below shows the dataset statistics of the benchmark datasets.</p>
+<table style="width:100%">
+    <colgroup>
+        <col span="1" style="width: 20%;">
+        <col span="1" style="width: 10%;">
+        <col span="1" style="width: 10%;">
+        <col span="1" style="width: 10%;">
+        <col span="1" style="width: 10%;">
+        <col span="1" style="width: 20%;">
+        <!-- <col span="1" style="width: 20%;"> -->
+    </colgroup>
+    <tr>
+        <th></th>
+        <th colspan="2" style="text-align: center;"><b>Training</b></th>
+        <th colspan="2" style="text-align: center;"><b>Testing</b></th>
+        <th></th>
+        <!-- <th></th> -->
+    </tr>
+    <tr>
+        <th><b>Dataset</b></th>
+        <th><b>Inst.</b></th>
+        <th><b>OFF %</b></th>
+        <th><b>Inst.</b></th>
+        <th><b>OFF %</b></th>
+        <th><b>Data Sources</b></th>
+        <!-- <th><b>Reference</b></th> -->
+    </tr>
+    <tr>
+        <td>AHSD</td>
+        <td>19,822</td>
+        <td>0.83</td>
+        <td>4,956</td>
+        <td>0.82</td>
+        <td>Twitter</td>
+        <!-- <td><cite><a href="URL">davidson2017</a></cite></td> -->
+    </tr>
+    <tr>
+        <td>HASOC</td>
+        <td>5,604</td>
+        <td>0.36</td>
+        <td>1,401</td>
+        <td>0.35</td>
+        <td>Twitter, Facebook</td>
+        <!-- <td><cite><a href="URL">mandl2020</a></cite></td> -->
+    </tr>
+    <tr>
+        <td>HatE</td>
+        <td>9,000</td>
+        <td>0.42</td>
+        <td>1,434</td>
+        <td>0.42</td>
+        <td>Twitter</td>
+        <!-- <td><cite><a href="URL">basile2019semeval</a></cite></td> -->
+    </tr>
+    <tr>
+        <td>HateX</td>
+        <td>11,535</td>
+        <td>0.59</td>
+        <td>3,844</td>
+        <td>0.58</td>
+        <td>Twitter, Gab</td>
+        <!-- <td><cite><a href="URL">mathew2020hatexplain</a></cite></td> -->
+    </tr>
+    <tr>
+        <td>OHS</td>
+        <td>8,285</td>
+        <td>0.21</td>
+        <td>2,090</td>
+        <td>0.20</td>
+        <td>Reddit</td>
+        <!-- <td><cite><a href="URL">qian-etal-2019-benchmark</a></cite></td> -->
+    </tr>
+    <tr>
+        <td>OLID</td>
+        <td>13,240</td>
+        <td>0.33</td>
+        <td>860</td>
+        <td>0.27</td>
+        <td>Twitter</td>
+        <!-- <td><cite><a href="URL">OLID</a></cite></td> -->
+    </tr>
+    <tr>
+        <td>TCC</td>
+        <td>12,000</td>
+        <td>0.09</td>
+        <td>2,500</td>
+        <td>0.10</td>
+        <td>Wikipedia Talk</td>
+        <!-- <td>URL<sup>1</sup></td> -->
+    </tr>
+    <tr>
+        <td>TRAC</td>
+        <td>4,263</td>
+        <td>0.20</td>
+        <td>1,200</td>
+        <td>0.42</td>
+        <td>Facebook, Twitter, YouTube</td>
+        <!-- <td><cite><a href="URL">trac2-dataset</a></cite></td> -->
+    </tr>
+</table>
+
 </div>
 
 <div class="content">
 <h2>Code</h2>
 The code and the datasets can be accessed here: <a href="https://github.com/TharinduDR/GeneralOffense.git">GenOffense</a>
+
+<h3>Installation</h3>
+<p>Clone the repository from github using the link above as follows:</p>
+<pre>git clone https://github.com/TharinduDR/GeneralOffense.git</pre>
+
+<p>Navigate to the GenOffense directory and install the required packages</p>
+<pre>cd GeneralOffense
+pip install -r requirements
+</pre>
+
+<p>If only dataset needs to be loaded, this can be done as follows.</p>
+<pre>from util.load_data import load_dataset
+load_dataset(DATASET, TYPE)
+</pre>
+
+The type of dataset can be either "train" or "test".
+
+<h3>Training</h3>
+<p>To fine-tune models using appropriate datasets, first navigate to the folder corresponding to a dataset.</p>
+<pre>cd data/DATASET</pre>
+
+<p>Make any changes to the config files if required (config files are named DATASET_config.py). Then run the train script as follows.</p>
+<pre>python DATASET.py</pre>
+
 </div>
 
 
